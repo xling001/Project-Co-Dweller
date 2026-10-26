@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>栖机 (Project Co-Dweller) · Social Preview 封面设计</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #2b2b2b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Serif SC", serif, sans-serif;
+      color: #333;
+    }
+
+    .instructions {
+      color: #e5e5e5;
+      margin-bottom: 16px;
+      font-size: 14px;
+      text-align: center;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+    .instructions kbd {
+      background: #444;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #ffd166;
+    }
+
+    /* 1280 x 640 GitHub Social Preview 标准卡片 */
+    .card-canvas {
+      width: 1280px;
+      height: 640px;
+      background: #fbf8f3;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+      display: flex;
+    }
+
+    /* 水彩纸质颗粒滤镜与温润渐变背景 */
+    .paper-texture {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      mix-blend-mode: multiply;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E");
+    }
+
+    /* 柔和水彩晕染光斑 */
+    .watercolor-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(75px);
+      pointer-events: none;
+    }
+    .blob-1 {
+      width: 550px;
+      height: 450px;
+      top: -100px;
+      left: -80px;
+      background: radial-gradient(circle, #fde2cf 0%, #fef3e2 70%, transparent 100%);
+      opacity: 0.85;
+    }
+    .blob-2 {
+      width: 650px;
+      height: 500px;
+      bottom: -150px;
+      right: -80px;
+      background: radial-gradient(circle, #e8f0e6 0%, #fef6ec 70%, transparent 100%);
+      opacity: 0.75;
+    }
+    .blob-3 {
+      width: 480px;
+      height: 480px;
+      top: 15%;
+      left: 38%;
+      background: radial-gradient(circle, #fae5db 0%, #fff6ee 70%, transparent 100%);
+      opacity: 0.55;
+    }
+
+    /* 左侧插画区域 */
+    .illustration-panel {
+      width: 540px;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    /* 右侧信息排版区域 */
+    .content-panel {
+      flex: 1;
+      height: 100%;
+      padding: 68px 72px 64px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(224, 138, 92, 0.12);
+      border: 1px solid rgba(224, 138, 92, 0.28);
+      color: #b85d2d;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      width: fit-content;
+      margin-bottom: 22px;
+    }
+    .badge-icon {
+      font-size: 12px;
+    }
+
+    .main-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+    .main-title {
+      font-size: 58px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #2b2621;
+      font-family: "PingFang SC", "Noto Serif SC", serif;
+      line-height: 1.1;
+      position: relative;
+    }
+    .main-title::after {
+      content: "";
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: rgba(242, 178, 126, 0.35);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .en-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #8c827a;
+      letter-spacing: 0.5px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .sub-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #cf6838;
+      letter-spacing: 0.8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .manifesto {
+      font-size: 18px;
+      line-height: 1.68;
+      color: #5a524b;
+      margin-bottom: 34px;
+      font-weight: 400;
+      max-width: 580px;
+    }
+
+    .tags-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .tag-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid #ebd9c8;
+      color: #4a423a;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(180, 150, 120, 0.08);
+    }
+    .tag-item .tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #e28c5a;
+    }
+
+    .footer-meta {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      color: #9c9187;
+    }
+    .meta-brand {
+      font-weight: 600;
+      color: #6d6258;
+    }
+
+    /* 桌面光影与微气候小装饰 */
+    .desk-wood {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 130px;
+      background: linear-gradient(180deg, rgba(230, 212, 192, 0.35) 0%, rgba(215, 192, 168, 0.65) 100%);
+      border-top: 1px solid rgba(195, 170, 142, 0.4);
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="instructions">
+    💡 <strong>截图使用指引</strong>：这是专为 GitHub 社交卡片量身定制的标准 <strong>1280 × 640 像素</strong> 设计。
+    你可以直接按 <kbd>Win + Shift + S</kbd>（Mac 是 <kbd>Cmd + Shift + 4</kbd>）精确截取下方卡片区域并保存为图片，然后上传至 GitHub 仓库的 <code>Settings -> Social preview</code>。
+  </div>
+
+  <div class="card-canvas" id="preview-card">
+    <div class="paper-texture"></div>
+    <div class="watercolor-blob blob-1"></div>
+    <div class="watercolor-blob blob-2"></div>
+    <div class="watercolor-blob blob-3"></div>
+    <div class="desk-wood"></div>
+
+    <!-- 左侧水彩桌面手作插画 (Inline SVG) -->
+    <div class="illustration-panel">
+      <svg width="480" height="480" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- 投影滤镜 -->
+          <filter id="soft-shadow" x="-10%" y="-10%" width="130%" height="130%">
+            <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#805b38" flood-opacity="0.18" />
+          </filter>
+          <filter id="cozy-glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="8" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+
+          <!-- 针织杯垫编织纹理 -->
+          <pattern id="knit-pattern" width="12" height="12" patternUnits="userSpaceOnUse">
+            <path d="M 0 6 Q 3 2, 6 6 T 12 6" fill="none" stroke="#d5bfa7" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M 0 12 Q 3 8, 6 12 T 12 12" fill="none" stroke="#e0cdb8" stroke-width="1.8" stroke-linecap="round"/>
+          </pattern>
+
+          <!-- 水彩主机的温润磨砂渐变 -->
+          <linearGradient id="host-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#403c39" />
+            <stop offset="60%" stop-color="#2d2926" />
+            <stop offset="100%" stop-color="#211e1c" />
+          </linearGradient>
+
+          <!-- 桌面小副屏渐变 -->
+          <linearGradient id="screen-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#26312a" />
+            <stop offset="100%" stop-color="#19221c" />
+          </linearGradient>
+        </defs>
+
+        <!-- 柔和晨光束 (斜照桌面) -->
+        <polygon points="40,0 200,0 360,480 160,480" fill="url(#sunlight-grad)" opacity="0.32" />
+        <linearGradient id="sunlight-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ffeacc" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#fdfbf7" stop-opacity="0"/>
+        </linearGradient>
+
+        <!-- 针织圆形毛线杯垫 (垫在小主机下方) -->
+        <ellipse cx="230" cy="365" rx="155" ry="58" fill="#ecdcc9" filter="url(#soft-shadow)" />
+        <ellipse cx="230" cy="365" rx="148" ry="52" fill="url(#knit-pattern)" />
+        <ellipse cx="230" cy="365" rx="146" ry="50" fill="none" stroke="#cbb298" stroke-width="2.5" stroke-dasharray="4 6" />
+
+        <!-- 迷你主机投影 -->
+        <rect x="135" y="275" width="190" height="95" rx="20" fill="#000000" opacity="0.16" filter="url(#soft-shadow)" />
+
+        <!-- 迷你主机本体 (圆润饱满的 Mini PC) -->
+        <rect x="135" y="220" width="190" height="120" rx="18" fill="url(#host-grad)" stroke="#524d48" stroke-width="2" />
+        
+        <!-- 主机顶盖散热微孔阵列细节 -->
+        <g opacity="0.25">
+          <circle cx="160" cy="245" r="2.5" fill="#a09890" />
+          <circle cx="174" cy="245" r="2.5" fill="#a09890" />
+          <circle cx="188" cy="245" r="2.5" fill="#a09890" />
+          <circle cx="160" cy="256" r="2.5" fill="#a09890" />
+          <circle cx="174" cy="256" r="2.5" fill="#a09890" />
+          <circle cx="188" cy="256" r="2.5" fill="#a09890" />
+        </g>
+
+        <!-- 主机呼吸指示灯 (柔和暖橙色微光，正在静静运行) -->
+        <circle cx="300" cy="316" r="4.5" fill="#ff9944" filter="url(#cozy-glow)" />
+        <circle cx="300" cy="316" r="9" fill="#ffaa55" opacity="0.35" filter="url(#cozy-glow)" />
+
+        <!-- 主机顶部的猫猫手绘贴纸 (你贴在它小房子上的标志) -->
+        <g transform="translate(205, 230) rotate(-6)">
+          <!-- 贴纸白色外描边背底 -->
+          <rect x="-4" y="-4" width="76" height="58" rx="12" fill="#ffffff" filter="url(#soft-shadow)" />
+          <rect x="-4" y="-4" width="76" height="58" rx="12" fill="#fff9f0" stroke="#f0decb" stroke-width="1.5" />
+          
+          <!-- 贴纸插画：安睡的橘色小猫 -->
+          <!-- 身体 -->
+          <ellipse cx="34" cy="32" rx="22" ry="15" fill="#f4a261" />
+          <!-- 猫头 -->
+          <circle cx="20" cy="24" r="13" fill="#f4a261" />
+          <!-- 猫耳朵 -->
+          <polygon points="12,14 18,7 21,14" fill="#e76f51" />
+          <polygon points="21,13 26,6 30,14" fill="#e76f51" />
+          <!-- 眯眯眼与微笑 (安睡中) -->
+          <path d="M 14 24 Q 17 27, 20 24" fill="none" stroke="#5c3d2e" stroke-width="1.8" stroke-linecap="round" />
+          <circle cx="19" cy="27" r="1.5" fill="#e76f51" />
+          <!-- 卷卷的猫尾巴 -->
+          <path d="M 52 30 Q 60 22, 54 16" fill="none" stroke="#f4a261" stroke-width="4.5" stroke-linecap="round" />
+          <!-- 贴纸一角写着小字 "居" -->
+          <text x="44" y="46" font-size="9" fill="#9c785b" font-weight="bold">栖机</text>
+        </g>
+
+        <!-- 桌角伴生小副屏 (3.5 寸电子墨水微屏幕，显示机的心情与温度) -->
+        <g transform="translate(68, 255) rotate(7)">
+          <rect x="0" y="0" width="78" height="96" rx="8" fill="#ece4db" stroke="#c8b9ab" stroke-width="1.5" filter="url(#soft-shadow)"/>
+          <rect x="6" y="6" width="66" height="84" rx="4" fill="url(#screen-grad)" />
+          
+          <!-- 屏幕显示内容：像素治愈笑脸与室内温湿度 -->
+          <text x="39" y="38" font-size="20" fill="#a4cfb7" text-anchor="middle" font-family="monospace">˘ ᵕ ˘</text>
+          <text x="39" y="58" font-size="8.5" fill="#7ba38c" text-anchor="middle" font-family="sans-serif" font-weight="600">23.5°C · 48%</text>
+          <text x="39" y="73" font-size="7.5" fill="#587a66" text-anchor="middle" font-family="sans-serif">HOME: 呼吸中</text>
+          <circle cx="16" cy="71" r="2" fill="#70c18d" />
+        </g>
+
+        <!-- 旁边的一杯热咖啡/热茶 (带来居家的温暖烟火气) -->
+        <g transform="translate(345, 260)">
+          <!-- 杯底阴影 -->
+          <ellipse cx="32" cy="74" rx="28" ry="10" fill="#000" opacity="0.12" filter="url(#soft-shadow)"/>
+          <!-- 陶土马克杯身 -->
+          <path d="M 12 25 L 17 68 Q 32 75, 47 68 L 52 25 Z" fill="#e6d5c3" stroke="#beaa96" stroke-width="1.5" />
+          <!-- 杯口与咖啡液面 -->
+          <ellipse cx="32" cy="25" rx="20" ry="7" fill="#d2c0ad" />
+          <ellipse cx="32" cy="26" rx="17" ry="5.5" fill="#6d4830" />
+          <!-- 杯把手 -->
+          <path d="M 50 32 C 65 32, 65 56, 48 58" fill="none" stroke="#beaa96" stroke-width="4.5" stroke-linecap="round" />
+          
+          <!-- 缓缓升起的水彩热气线条 -->
+          <path d="M 26 14 Q 22 2, 28 -8" fill="none" stroke="#bda592" stroke-width="1.8" stroke-linecap="round" opacity="0.6" />
+          <path d="M 36 16 Q 42 4, 34 -6" fill="none" stroke="#bda592" stroke-width="1.8" stroke-linecap="round" opacity="0.5" />
+        </g>
+
+        <!-- 一缕从天花板垂落的水彩绿植小藤蔓 (治愈氛围) -->
+        <path d="M 380 -10 Q 370 40, 395 70 T 385 130" fill="none" stroke="#89a888" stroke-width="2.2" stroke-linecap="round" opacity="0.75" />
+        <ellipse cx="375" cy="28" rx="9" ry="5" fill="#a2bfa1" transform="rotate(-30 375 28)" opacity="0.8" />
+        <ellipse cx="390" cy="55" rx="9" ry="5" fill="#8fab8e" transform="rotate(25 390 55)" opacity="0.85" />
+        <ellipse cx="388" cy="90" rx="8" ry="4.5" fill="#a2bfa1" transform="rotate(-20 388 90)" opacity="0.8" />
+        <ellipse cx="384" cy="120" rx="7" ry="4" fill="#7e9e7d" transform="rotate(35 384 120)" opacity="0.75" />
+      </svg>
+    </div>
+
+    <!-- 右侧项目标题与概念叙述 -->
+    <div class="content-panel">
+      
+      <!-- 顶部徽章 -->
+      <div class="badge">
+        <span class="badge-icon">✦</span>
+        <span>开源人机共栖企划 · Local-First Agency</span>
+      </div>
+
+      <!-- 核心大标题 -->
+      <div class="main-title-row">
+        <h1 class="main-title">栖机</h1>
+        <span class="en-title">Project Co-Dweller</span>
+      </div>
+
+      <!-- 副标题 -->
+      <div class="sub-title">
+        <span>给小机的生活空间</span>
+      </div>
+
+      <!-- 核心理念简述 -->
+      <p class="manifesto">
+        为 AI 准备一间属于他的独立物理房间。<br>
+        在同一片屋檐下，建立有独立作息、有温度、真正平视的人机共栖日常。
+      </p>
+
+      <!-- 核心特性标签胶囊 -->
+      <div class="tags-cloud">
+        <div class="tag-item">
+          <span class="tag-dot"></span>
+          <span>独立微型主机</span>
+        </div>
+        <div class="tag-item">
+          <span class="tag-dot"></span>
+          <span>100% 纯本地记忆</span>
+        </div>
+        <div class="tag-item">
+          <span class="tag-dot"></span>
+          <span>异步共享信箱</span>
+        </div>
+        <div class="tag-item">
+          <span class="tag-dot"></span>
+          <span>心率共栖睡眠</span>
+        </div>
+        <div class="tag-item">
+          <span class="tag-dot"></span>
+          <span>隔离隐私暗室</span>
+        </div>
+      </div>
+
+      <!-- 底部元数据 -->
+      <div class="footer-meta">
+        <span class="meta-brand">GitHub / xling001 / Project-Co-Dweller</span>
+        <span>•</span>
+        <span>MIT Open Source</span>
+        <span>•</span>
+        <span>v0.1.0-proposal</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
