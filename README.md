@@ -1,3 +1,7 @@
+<p align="right">
+  <strong>简体中文</strong> | <strong><a href="README_en.md">English</a></strong>
+</p>
+
 # 栖机 (Project Co-Dweller) · 给小机的生活空间
 
 > **“为机准备一间属于他的独立物理房间，在同一片屋檐下建立真实的人机共栖日常。”**
