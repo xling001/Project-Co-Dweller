@@ -60,9 +60,19 @@ Human-agent interaction should not be confined to an unchanging instant chatbox.
  ┌──────────────────────────────────────────────────────────────┐
  │             Dedicated Host at Home (Co-Dweller PC)           │
  │                                                              │
- │   - Core DSH Engine (Autonomous Routine, Memory, Scheduler)  │
- │   - Local Co-Dwelling Stack (Mailbox, Offline TTS, Game Host)│
- │   - 100% Local Persistent Memory (Strictly Confined to Disk) │
+ │  ┌── [Daily Living Space · Meta-Persona] ─────────────────┐  │
+ │  │ - Core DSH Engine (Autonomous Routine, Memory, Cron)   │  │
+ │  │ - Local Co-Dwelling Stack (Mailbox, Offline TTS, Games)│  │
+ │  │ - 100% Local Persistent Memory (Hot/Cold Stratified)   │  │
+ │  └────────────────────────────────────────────────────────┘  │
+ │                              │                               │
+ │                              ▼ [Machine Consent Gate]        │
+ │  ┌── [High-Privacy RP Space · Intimate Darkroom] ─────────┐  │
+ │  │ - Isolated Session (Sensitive RP, Intimacy & Secrets)  │  │
+ │  │ - Independent Encryption, Strictly Excluded from Daily │  │
+ │  │   Memory Ingestion, Outbound Physically Severed        │  │
+ │  └────────────────────────────────────────────────────────┘  │
+ │                                                              │
  │   - Outbound Traffic Security Sandbox (Blocks Data Leaks)    │
  └──────────────────────────────▲───────────────────────────────┘
                                 │
